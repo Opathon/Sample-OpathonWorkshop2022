@@ -1,0 +1,11 @@
+﻿global using CO2NET_Sample;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Senparc.CO2NET;
+global using Senparc.CO2NET.Extensions;
+global using Senparc.CO2NET.Helpers;
+global using Senparc.CO2NET.MessageQueue;
+global using Senparc.CO2NET.RegisterServices;
+global using Senparc.CO2NET.Trace;
+global using System;
+global using System.Net.WebSockets;
