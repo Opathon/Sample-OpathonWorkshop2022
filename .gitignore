@@ -53,3 +53,5 @@ dkms.conf
 .vs/
 bin/
 obj/
+/Day2/Sample_NCF/src/back-end/Extensions/Senparc.Xncf.WeixinManagerBase.Tests/App_Data/SenparcTraceLog
+/Day2/Sample_NCF/src/back-end/Senparc.Web/Properties/PublishProfiles
