@@ -2,6 +2,7 @@
 
 //Reference Configuration File
 using Senparc.CO2NET.Cache;
+using Senparc.CO2NET.Cache.Redis;
 using Senparc.CO2NET.HttpUtility;
 
 var configBuilder = new ConfigurationBuilder();
@@ -30,6 +31,40 @@ IRegisterService register =
                    .UseSenparcGlobal();
 
 var serviceProvider = services.BuildServiceProvider();
+
+#endregion
+
+
+#region Setup Redis Cache
+
+//配置全局使用Redis缓存（按需，独立）
+
+//register.ChangeDefaultCacheNamespace("Opathon");
+//Console.WriteLine($"Cache namespace changed：{Senparc.CO2NET.Config.DefaultCacheNamespace}");
+
+//var redisConfigurationStr = senparcSetting.Cache_Redis_Configuration;
+//Senparc.CO2NET.Cache.Redis.Register.SetConfigurationOption(redisConfigurationStr);
+//Console.WriteLine("Finish Redis setting");
+
+
+////以下会立即将全局缓存设置为 Redis
+//Senparc.CO2NET.Cache.Redis.Register.UseKeyValueRedisNow();//键值对缓存策略（推荐）
+//Console.WriteLine("Start Redis UseKeyValue mode");
+
+////Senparc.CO2NET.Cache.Redis.Register.UseHashRedisNow();//HashSet储存格式的缓存策略
+
+//var cache = Senparc.CO2NET.Cache.CacheStrategyFactory.GetObjectCacheStrategyInstance();
+//Console.WriteLine("Current Cache Strategy 1:" + cache.GetType().Name);
+//await cache.SetAsync("aa", 11);
+
+//CacheStrategyFactory.RegisterObjectCacheStrategy(() => LocalObjectCacheStrategy.Instance);
+//cache = Senparc.CO2NET.Cache.CacheStrategyFactory.GetObjectCacheStrategyInstance();
+//Console.WriteLine("Current Cache Strategy 2:" + cache.GetType().Name);
+
+//CacheStrategyFactory.RegisterObjectCacheStrategy(() => RedisObjectCacheStrategy.Instance);
+//cache = Senparc.CO2NET.Cache.CacheStrategyFactory.GetObjectCacheStrategyInstance();
+//Console.WriteLine("Current Cache Strategy 3:" + cache.GetType().Name);
+
 
 #endregion
 
