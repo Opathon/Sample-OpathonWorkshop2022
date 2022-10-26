@@ -39,5 +39,48 @@ namespace Opathon.Xncf.WeixinManagerWxOpen.OHS.Local.AppService
                 return result;
             });
         }
+
+
+        /// <summary>
+        /// 变亮
+        /// </summary>
+        /// <returns></returns>
+        [ApiBind]
+        public async Task<AppResponseBase<ColorDto>> GetBrightenAsync()
+        {
+            return await this.GetResponseAsync<AppResponseBase<ColorDto>, ColorDto>(async (response, logger) =>
+            {
+                var colorDto = await _colorService.Brighten().ConfigureAwait(false);
+                return colorDto;
+            });
+        }
+
+        /// <summary>
+        /// 变暗
+        /// </summary>
+        /// <returns></returns>
+        [ApiBind]
+        public async Task<AppResponseBase<ColorDto>> GetDarkenAsync()
+        {
+            return await this.GetResponseAsync<AppResponseBase<ColorDto>, ColorDto>(async (response, logger) =>
+            {
+                var colorDto = await _colorService.Darken().ConfigureAwait(false);
+                return colorDto;
+            });
+        }
+
+        /// <summary>
+        /// 变暗
+        /// </summary>
+        /// <returns></returns>
+        [ApiBind]
+        public async Task<AppResponseBase<ColorDto>> GetRandomAsync()
+        {
+            return await this.GetResponseAsync<AppResponseBase<ColorDto>, ColorDto>(async (response, logger) =>
+            {
+                var colorDto = await _colorService.Random().ConfigureAwait(false);
+                return colorDto;
+            });
+        }
     }
 }
