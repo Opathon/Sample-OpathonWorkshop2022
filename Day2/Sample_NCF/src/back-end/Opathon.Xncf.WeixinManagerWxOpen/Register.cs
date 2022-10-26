@@ -14,9 +14,13 @@ using Senparc.Ncf.Core.Models;
 using Senparc.Ncf.Database;
 using Senparc.Ncf.XncfBase.Database;
 using Opathon.Xncf.WeixinManagerWxOpen.Models.DatabaseModel.Dto;
+using Microsoft.AspNetCore.Builder;
+using Senparc.CO2NET.RegisterServices;
+using Senparc.Weixin.WxOpen;
 
 namespace Opathon.Xncf.WeixinManagerWxOpen
 {
+    [XncfOrder(4300)]
     [XncfRegister]
     public partial class Register : XncfRegisterBase, IXncfRegister
     {
@@ -79,6 +83,23 @@ namespace Opathon.Xncf.WeixinManagerWxOpen
         {
             services.AddScoped<ColorAppService>();
             return base.AddXncfModule(services, configuration, env);
+        }
+
+        public override IApplicationBuilder UseXncfModule(IApplicationBuilder app, IRegisterService registerService)
+        {
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var weixinRegisterService = scope.ServiceProvider.GetService<Senparc.Xncf.WeixinManagerBase.OHS.Local.AppService.WeixinRegisterService>();
+
+                weixinRegisterService.RegisterWeixin((r, s) =>
+                {
+                    r.RegisterWxOpenAccount(s, "奥派松微信小程序");
+                    return 0;
+                }).ConfigureAwait(false).GetAwaiter().GetResult();
+            }
+
+            return base.UseXncfModule(app, registerService);
+
         }
     }
 }

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Senparc.CO2NET.WebApi;
 
 namespace Opathon.Xncf.WeixinManagerWxOpen.OHS.Local.AppService
 {
@@ -45,7 +46,7 @@ namespace Opathon.Xncf.WeixinManagerWxOpen.OHS.Local.AppService
         /// 变亮
         /// </summary>
         /// <returns></returns>
-        [ApiBind]
+        [ApiBind(ApiRequestMethod = ApiRequestMethod.Get)]
         public async Task<AppResponseBase<ColorDto>> GetBrightenAsync()
         {
             return await this.GetResponseAsync<AppResponseBase<ColorDto>, ColorDto>(async (response, logger) =>
