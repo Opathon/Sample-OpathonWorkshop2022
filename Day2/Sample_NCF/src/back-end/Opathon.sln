@@ -46,6 +46,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sennparc.Xncf.WeixinManager
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Senparc.Xncf.WeixinManagerTenPayV3Tests", "Extensions\Senparc.Xncf.WeixinManagerTenPayV3Tests\Senparc.Xncf.WeixinManagerTenPayV3Tests.csproj", "{9DF17633-C3E5-4AC2-AE97-EA228A5B23D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Opathon.Xncf.WeixinManagerWxOpen", "Opathon.Xncf.WeixinManagerWxOpen\Opathon.Xncf.WeixinManagerWxOpen.csproj", "{5EB072D3-184D-4553-B8A7-7935F1B11631}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -191,6 +193,16 @@ Global
 		{9DF17633-C3E5-4AC2-AE97-EA228A5B23D2}.TemplateRelease|Any CPU.Build.0 = Release|Any CPU
 		{9DF17633-C3E5-4AC2-AE97-EA228A5B23D2}.Test|Any CPU.ActiveCfg = Debug|Any CPU
 		{9DF17633-C3E5-4AC2-AE97-EA228A5B23D2}.Test|Any CPU.Build.0 = Debug|Any CPU
+		{5EB072D3-184D-4553-B8A7-7935F1B11631}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EB072D3-184D-4553-B8A7-7935F1B11631}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EB072D3-184D-4553-B8A7-7935F1B11631}.Debug-Dapr|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EB072D3-184D-4553-B8A7-7935F1B11631}.Debug-Dapr|Any CPU.Build.0 = Debug|Any CPU
+		{5EB072D3-184D-4553-B8A7-7935F1B11631}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EB072D3-184D-4553-B8A7-7935F1B11631}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EB072D3-184D-4553-B8A7-7935F1B11631}.TemplateRelease|Any CPU.ActiveCfg = TemplateRelease|Any CPU
+		{5EB072D3-184D-4553-B8A7-7935F1B11631}.TemplateRelease|Any CPU.Build.0 = TemplateRelease|Any CPU
+		{5EB072D3-184D-4553-B8A7-7935F1B11631}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{5EB072D3-184D-4553-B8A7-7935F1B11631}.Test|Any CPU.Build.0 = Test|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -210,6 +222,7 @@ Global
 		{E8404650-B6B9-4E4D-81BA-18A88A0742FD} = {B2BB51ED-71A7-4348-BE65-8FC2A5B45739}
 		{565F00E1-76BD-4F0C-B1C4-C06255D06045} = {B2BB51ED-71A7-4348-BE65-8FC2A5B45739}
 		{9DF17633-C3E5-4AC2-AE97-EA228A5B23D2} = {B2BB51ED-71A7-4348-BE65-8FC2A5B45739}
+		{5EB072D3-184D-4553-B8A7-7935F1B11631} = {76FC86E0-991D-47B7-8AAB-42B27DAB10C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7427A6C9-D522-4B10-B0AC-607D69736B50}
