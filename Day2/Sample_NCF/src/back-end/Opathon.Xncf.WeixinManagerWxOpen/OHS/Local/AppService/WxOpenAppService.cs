@@ -14,6 +14,7 @@ using Senparc.Weixin.WxOpen.AdvancedAPIs.WxApp.Business.JsonResult;
 using Senparc.Weixin.WxOpen.Entities;
 using Senparc.Weixin.WxOpen.Helpers;
 using Senparc.Xncf.WeixinManagerBase.Domain.Services;
+using Senparc.CO2NET.Cache;
 
 namespace Opathon.Xncf.WeixinManagerWxOpen.OHS.Local.AppService
 {
@@ -144,15 +145,17 @@ sessionKey: {(await SessionContainer.CheckRegisteredAsync(sessionId)
                         }
 
                         //保存到数据库
-
-                        var user = await _userService.GetObjectAsync(z => z.UnionId == decodedUserInfo.unionId);
-                        if (user == null)
+                        var cache = CacheStrategyFactory.GetObjectCacheStrategyInstance();
+                        using (var cacheLock = await cache.BeginCacheLockAsync("Opathon", decodedUserInfo.unionId))
                         {
-                            user = new Senparc.Xncf.WeixinManagerBase.Domain.Models.DatabaseModel.User(null, "", "", "", "", decodedUserInfo.unionId, decodedUserInfo.nickName, 0, "", "", "", "", decodedUserInfo.avatarUrl);
+                            var user = await _userService.GetObjectAsync(z => z.UnionId == decodedUserInfo.unionId);
+                            if (user == null)
+                            {
+                                user = new Senparc.Xncf.WeixinManagerBase.Domain.Models.DatabaseModel.User(null, "", "", "", "", decodedUserInfo.unionId, decodedUserInfo.nickName, 0, "", "", "", "", decodedUserInfo.avatarUrl);
 
-                            await _userService.SaveObjectAsync(user);
+                                await _userService.SaveObjectAsync(user);
+                            }
                         }
-
                     }
                 }
 
