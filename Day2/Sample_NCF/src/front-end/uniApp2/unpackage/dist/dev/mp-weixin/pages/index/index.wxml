@@ -1,0 +1,1 @@
+<view class="content"><image class="logo" src="{{userInfo.avatarUrl||'/static/logo.png'}}"></image><view class="nickName">{{'昵称:'+(userInfo.nickName||'uni-app')+''}}</view><view class="text-area"><button data-event-opts="{{[['tap',[['getUserProfile',['$event']]]]]}}" class="bnt" bindtap="__e">获取个人信息</button></view></view>

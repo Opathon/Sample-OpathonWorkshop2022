@@ -1,0 +1,42 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/index",
+    "pages/demo/index"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "",
+        "selectedIconPath": "",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/demo/index",
+        "iconPath": "",
+        "selectedIconPath": "",
+        "text": "演示"
+      },
+      {
+        "pagePath": "pages/login/index",
+        "iconPath": "",
+        "selectedIconPath": "",
+        "text": "登录"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "定位展示位置权限"
+    }
+  },
+  "usingComponents": {}
+}
