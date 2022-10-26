@@ -4,6 +4,7 @@
 using Senparc.CO2NET.Cache;
 using Senparc.CO2NET.Cache.Redis;
 using Senparc.CO2NET.HttpUtility;
+using System;
 
 var configBuilder = new ConfigurationBuilder();
 configBuilder.AddJsonFile("appsettings.json", false, false);
@@ -39,31 +40,61 @@ var serviceProvider = services.BuildServiceProvider();
 
 //配置全局使用Redis缓存（按需，独立）
 
-//register.ChangeDefaultCacheNamespace("Opathon");
-//Console.WriteLine($"Cache namespace changed：{Senparc.CO2NET.Config.DefaultCacheNamespace}");
+register.ChangeDefaultCacheNamespace("Opathon2022");
+Console.WriteLine($"Cache namespace changed：{Senparc.CO2NET.Config.DefaultCacheNamespace}");
 
-//var redisConfigurationStr = senparcSetting.Cache_Redis_Configuration;
-//Senparc.CO2NET.Cache.Redis.Register.SetConfigurationOption(redisConfigurationStr);
-//Console.WriteLine("Finish Redis setting");
+var redisConfigurationStr = senparcSetting.Cache_Redis_Configuration;
+Senparc.CO2NET.Cache.Redis.Register.SetConfigurationOption(redisConfigurationStr);
+Console.WriteLine("Finish Redis setting");
 
 
 ////以下会立即将全局缓存设置为 Redis
-//Senparc.CO2NET.Cache.Redis.Register.UseKeyValueRedisNow();//键值对缓存策略（推荐）
-//Console.WriteLine("Start Redis UseKeyValue mode");
+Senparc.CO2NET.Cache.Redis.Register.UseKeyValueRedisNow();//键值对缓存策略（推荐）
+Console.WriteLine("Start Redis UseKeyValue mode");
 
 ////Senparc.CO2NET.Cache.Redis.Register.UseHashRedisNow();//HashSet储存格式的缓存策略
 
-//var cache = Senparc.CO2NET.Cache.CacheStrategyFactory.GetObjectCacheStrategyInstance();
-//Console.WriteLine("Current Cache Strategy 1:" + cache.GetType().Name);
-//await cache.SetAsync("aa", 11);
 
-//CacheStrategyFactory.RegisterObjectCacheStrategy(() => LocalObjectCacheStrategy.Instance);
-//cache = Senparc.CO2NET.Cache.CacheStrategyFactory.GetObjectCacheStrategyInstance();
-//Console.WriteLine("Current Cache Strategy 2:" + cache.GetType().Name);
+#region Cache
 
-//CacheStrategyFactory.RegisterObjectCacheStrategy(() => RedisObjectCacheStrategy.Instance);
-//cache = Senparc.CO2NET.Cache.CacheStrategyFactory.GetObjectCacheStrategyInstance();
-//Console.WriteLine("Current Cache Strategy 3:" + cache.GetType().Name);
+var cache = Senparc.CO2NET.Cache.CacheStrategyFactory.GetObjectCacheStrategyInstance();
+for (int i = 0; i < 10; i++)
+{
+    var now = SystemTime.Now;
+    cache.Set("Now", now.ToJson());
+    Console.WriteLine("Now:" + $"cost:{SystemTime.DiffTotalMS(now)}ms");
+}
+
+for (int i = 0; i < 10; i++)
+{
+    var dt2 = SystemTime.Now;
+    var nowFromCache = ((string)cache.Get("Now")).GetObject<DateTimeOffset>();
+    Console.WriteLine("Now from Cache:" + nowFromCache + $"cost:{SystemTime.DiffTotalMS(dt2)}ms");
+}
+
+#endregion
+
+var cache2 = CacheStrategyFactory.GetObjectCacheStrategyInstance();
+Console.WriteLine("Current Cache Strategy 1:" + cache2.GetType().Name);
+await cache2.SetAsync("CacheType", cache2.GetType().Name);
+await cache2.SetAsync("StudentList", Student.StudentList);
+var studentList2 = await cache2.GetAsync<List<Student>>("StudentList");
+Console.WriteLine("studentList2:"+studentList2.ToJson(true));
+
+CacheStrategyFactory.RegisterObjectCacheStrategy(() => LocalObjectCacheStrategy.Instance);
+cache2 = Senparc.CO2NET.Cache.CacheStrategyFactory.GetObjectCacheStrategyInstance();
+Console.WriteLine("Current Cache Strategy 2:" + cache2.GetType().Name);
+
+CacheStrategyFactory.RegisterObjectCacheStrategy(() => RedisObjectCacheStrategy.Instance);
+cache2 = Senparc.CO2NET.Cache.CacheStrategyFactory.GetObjectCacheStrategyInstance();
+Console.WriteLine("Current Cache Strategy 3:" + cache2.GetType().Name);
+
+for (int i = 0; i < 10; i++)
+{
+    var now3 = SystemTime.Now;
+    studentList2 = await cache2.GetAsync<List<Student>>("StudentList");
+    Console.WriteLine($"studentList2 cost:{SystemTime.DiffTotalMS(now3)}");
+}
 
 
 #endregion
@@ -148,5 +179,7 @@ Console.WriteLine("Hello, Opathon!");
 //Console.WriteLine("Go ahead.");
 
 #endregion
+
+
 
 Console.ReadKey();
