@@ -25,6 +25,9 @@ namespace CO2NET_Sample
             Id = id;
             Name = name;
             Age = age;
+
         }
+
+
     }
 }
