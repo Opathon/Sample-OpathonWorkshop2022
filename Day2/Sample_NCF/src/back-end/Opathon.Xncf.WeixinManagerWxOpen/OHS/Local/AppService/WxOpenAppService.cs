@@ -94,6 +94,7 @@ namespace Opathon.Xncf.WeixinManagerWxOpen.OHS.Local.AppService
                 }
             });
         }
+
         [ApiBind(ApiRequestMethod = ApiRequestMethod.Post)]
         public async Task<AppResponseBase<string>> DecodeEncryptedDataAsync(string type, string sessionId, string encryptedData, string iv)
         {
