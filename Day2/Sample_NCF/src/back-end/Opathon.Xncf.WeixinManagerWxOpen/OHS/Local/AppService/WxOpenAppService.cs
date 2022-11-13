@@ -47,7 +47,7 @@ namespace Opathon.Xncf.WeixinManagerWxOpen.OHS.Local.AppService
                         var sessionBag = SessionContainer.UpdateSession(null, jsonResult.openid, jsonResult.session_key, unionId);
 
                         //注意：生产环境下SessionKey属于敏感信息，不能进行传输！
-                        return sessionBag.Key+"|"+ sessionBag.SessionKey;
+                        return sessionBag.Key;
                     }
                     else
                     {
